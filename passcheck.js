@@ -14,7 +14,7 @@ function showError(input, message) {
   small.innerText = message;
 }
 
-// Show success outline
+// highlight successful input
 function showSuccess(input) {
   const formControl = input.parentElement;
   formControl.className = "form-control success";
@@ -48,10 +48,14 @@ function getFieldName(input) {
 }
 
 // Check email is valid
-function checkEmail(email) {
-  const re =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
+function checkEmail(input) {
+  const reg =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (reg.test(input.value.trim())) {
+    showSuccess(input);
+  } else {
+    showError(input, "Email is not valid");
+  }
 }
 
 //form sent with AJAX
